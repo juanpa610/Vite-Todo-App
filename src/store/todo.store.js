@@ -7,13 +7,7 @@ const Filters = {
 }
 
 const state = {
-    todos : [
-        new Todo('Jugar al voleibol'),
-        new Todo('Jugar al Basquetbol'),
-        new Todo('Jugar al futbol'),
-        new Todo('Jugar al POLL'),
-        new Todo('Jugar al GTA-V'),
-    ],
+    todos : [],
     filter: Filters.All,
 }
 
@@ -52,7 +46,7 @@ const addTodo = ( description ) => {
  * 
  * @param {String} todoId 
  */
-const changeStateTodo = ( todoId ) => {
+const toggleTodo = ( todoId ) => {
     state.todos = state.todos.map( todo => {
         if(todo.id === todoId){
             todo.done = !todo.done;
@@ -92,7 +86,7 @@ const getCurrentFilter = () => {
 
 export default {
     addTodo,
-    changeStateTodo,
+    toggleTodo,
     deleCompletedTodos,
     deleTodo,
     getCurrentFilter,

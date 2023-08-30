@@ -14,7 +14,7 @@ const elementIds = {
 export const App = (elementId) => {
 
     const displayTodos = () => {
-      const todos = todoStore.getTodos( todoStore.getCurrentFilter() );
+      const todos = todoStore.getTodos();
       renderTodos( elementIds.TodoList , todos);
     };
 
@@ -43,6 +43,23 @@ export const App = (elementId) => {
 
 
     todoListUl.addEventListener('click', (event) => {
+        //el closest('[data-id]') lo que hace es que busca dentro del target de  
+        //elemento al que se lee esta haciendo click el primer atributo mas cerca 
+        // con ese atributo y devuelve el target;
+        const element = event.target.closest('[data-id]');
+
+        todoStore.toggleTodo(element.getAttribute('data-id'));
+        displayTodos();
+    });
+
+    
+    todoListUl.addEventListener('click', (event) => {
+        if (event.target.tagName === 'BUTTON' && event.target.className === 'destroy' ) {
+            const element = event.target.closest('[data-id]');
+            console.debug(`💎🤑  element`, element)
+            todoStore.deleTodo(element.getAttribute('data-id'));
+            displayTodos();
+        } 
     });
 
 

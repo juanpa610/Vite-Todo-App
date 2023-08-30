@@ -12,7 +12,6 @@ let element;
 export const renderTodos = ( elementoIdHTML, todos = []) => {
     
     if( !element) element = document.querySelector(elementoIdHTML);
-    
     if( !element) throw new Error(`Element ${element} not found`);
      
     element.innerHTML = '';
