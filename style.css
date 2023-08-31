@@ -25,9 +25,6 @@ body {
 	line-height: 1.4em;
 	background: #f5f5f5;
 	color: #111111;
-	min-width: 230px;
-	max-width: 550px;
-	margin: 0 auto;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-weight: 300;
@@ -42,10 +39,12 @@ body {
 }
 
 .todoapp {
+	width: 90%;
 	background: #fff;
 	border-radius: 10px;
 	border: none;
-	margin: 130px 0 40px 0;
+	margin: 130px auto;
+	max-width: 750px;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -261,48 +260,50 @@ body {
 }
 
 .footer {
-	padding: 10px 15px;
-	height: 20px;
+	padding: 10px 0;
+	min-height: 20px;
 	text-align: center;
 	font-size: 15px;
 	border-top: 1px solid #e6e6e6;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
 .footer:before {
-	content: '';
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 50px;
-	overflow: hidden;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-	            0 8px 0 -3px #f6f6f6,
-	            0 9px 1px -3px rgba(0, 0, 0, 0.2),
-	            0 16px 0 -6px #f6f6f6,
-	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
+    content: '';
+	width: 98%;
+    position: absolute;
+    right: 20%;
+    z-index: -1;
+    bottom: -6px;
+    border-radius: 4px;
+    left: 1%;
+    height: 50px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6,
+	 0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6,
+	  0 17px 2px -6px rgba(0, 0, 0, 0.2);
 }
+
+
 
 .todo-count {
-	float: left;
-	text-align: left;
+	display: flex;
+	gap: 3px;
 }
-
 .todo-count strong {
 	font-weight: 300;
 }
 
 .filters {
-	margin: 0;
-	padding: 0;
 	list-style: none;
-	position: absolute;
-	right: 0;
-	left: 0;
+	display: flex;
+	padding: 0;
+	margin: 0;
 }
 
 .filters li {
-	display: inline;
 }
 
 .filters li a {
@@ -324,9 +325,6 @@ body {
 
 .clear-completed,
 html .clear-completed:active {
-	float: right;
-	position: relative;
-	line-height: 20px;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -372,9 +370,10 @@ html .clear-completed:active {
 	}
 }
 
-@media (max-width: 430px) {
+@media (max-width: 611px) {
 	.footer {
-		height: 50px;
+		flex-wrap: wrap-reverse;
+		gap: 10px;
 	}
 
 	.filters {

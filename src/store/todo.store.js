@@ -16,7 +16,16 @@ const initStore = () => {
 }
 
 const loadStore = () => {
-   throw new Error('Not implemented ');
+    if( !sessionStorage.getItem('todos') ) return;
+    const { todos = [] , filter = Filters.All} = JSON.parse(sessionStorage.getItem('todos'));
+    state.todos = todos;
+    state.filter = filter; 
+}
+
+loadStore();
+
+const saveStateToSessionStorage = () => {
+    sessionStorage.setItem('todos', JSON.stringify(state));
 }
 
 const getTodos = ( filter = Filters.All ) => {
@@ -32,7 +41,6 @@ const getTodos = ( filter = Filters.All ) => {
     }
 }
 
-
 /**
  * 
  * @param {String} description 
@@ -40,6 +48,8 @@ const getTodos = ( filter = Filters.All ) => {
 const addTodo = ( description ) => {
     if( !description )  throw new Error(`Description is required`); 
     state.todos.push( new Todo(description) );
+
+    saveStateToSessionStorage();
 }
 
 /**
@@ -52,7 +62,9 @@ const toggleTodo = ( todoId ) => {
             todo.done = !todo.done;
         }
         return todo;
-    })
+    });
+
+    saveStateToSessionStorage();
 }
 
 /**
@@ -61,10 +73,13 @@ const toggleTodo = ( todoId ) => {
  */
 const deleTodo = ( todoId ) => {
    state.todos = state.todos.filter( todo => todo.id !== todoId );
+
+   saveStateToSessionStorage();
 }
 
 const deleCompletedTodos = () => {
     state.todos = getTodos(Filters.Pending);
+    saveStateToSessionStorage();
 }
 
 /**
@@ -73,8 +88,8 @@ const deleCompletedTodos = () => {
  */
 const setFilter = ( newFilter = Filters.All ) => {
     state.filter = newFilter;
+    saveStateToSessionStorage();
 }
-
 
 /**
  * 
@@ -93,5 +108,6 @@ export default {
     initStore,
     loadStore,
     setFilter,
-    getTodos
+    getTodos,
+    Filters
 }
